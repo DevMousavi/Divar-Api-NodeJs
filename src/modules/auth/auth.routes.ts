@@ -4,6 +4,6 @@ import authController from './auth.controller';
 const route: Router = Router();
 type authRoutes = Router;
 
-route.post('/login', authController.Login);
+route.post('/send-otp', authController.sendOtp);
 
 export default route as authRoutes;

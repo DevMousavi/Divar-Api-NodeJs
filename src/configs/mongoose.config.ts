@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const MONGODB_URL = 'mongodb://localhost:27017/';
-const MONGODB_NAME = 'TaskManager';
+const MONGODB_NAME = 'Divar';
 
 mongoose
     .connect(MONGODB_URL + MONGODB_NAME, {})

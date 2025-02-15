@@ -1,36 +1,15 @@
-import userDataAccess from '../../dataAccess/user.dataAccess';
 import ResponseHandler from '../../utils/sendResponse.handler';
-import LoginDto from './dtos/login.dto';
-import AuthMessage from './auth.message';
-import jwtHandler from '../../utils/jwt.handler';
 import { NextFunction, Request, Response } from 'express';
-import { UserSchemaType } from '../../types/user/UserSchemaType';
-import { CustomStatusCodeEnum } from '../../enums/responseStatus.ts/CustomStatusCodeEnum';
+import SendOtpDto from './dtos/sendOtp.dto';
+import authService from './auth.service';
 
 class AuthController {
-    public Login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    public sendOtp = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const loginData: LoginDto = LoginDto.create(req.body);
+            const sendOtpData: SendOtpDto = SendOtpDto.create(req.body);
+            const result = await authService.sendOtp(sendOtpData.mobile);
 
-            const user: UserSchemaType | null = await userDataAccess.SelectUserByUserName(loginData.userName);
-
-            if (!user) {
-                return ResponseHandler.sendResponse(res, CustomStatusCodeEnum.WARNING_CODE, AuthMessage.NotFoundUser, null);
-            } else {
-                if (loginData.password !== user.password) {
-                    return ResponseHandler.sendResponse(res, CustomStatusCodeEnum.WARNING_CODE, 'Password or UserName is incorrect', null);
-                } else {
-                    return ResponseHandler.sendResponse(res, CustomStatusCodeEnum.SUCCESS_CODE, 'Login Successfully', {
-                        result: {
-                            userName: user.userName,
-                            accessToken: jwtHandler.createAccessToken(),
-                            expireAtAccessToken: jwtHandler.generateAccessTokenExpirationDate(),
-                            refreshToken: jwtHandler.createRefreshToken(),
-                            expireAtRefreshToken: jwtHandler.generateRefreshTokenExpirationDate(),
-                        },
-                    });
-                }
-            }
+            return ResponseHandler.sendResponse(res, result.statusCode, result.message, result.data);
         } catch (error) {
             next(error);
         }

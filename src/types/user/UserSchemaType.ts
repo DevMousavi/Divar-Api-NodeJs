@@ -1,11 +1,14 @@
 export interface UserSchemaType {
-    _id: string;
-    userName: string;
+    _id?: string;
+    fullName?: string;
     mobile: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-    verify: boolean;
+    otp: OTPType;
+    verifyMobile: boolean;
     updatedAt?: Date;
     createdAt?: Date;
+}
+
+interface OTPType {
+    code: number;
+    expireIn: number;
 }

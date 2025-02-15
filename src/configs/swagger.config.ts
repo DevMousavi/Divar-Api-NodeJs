@@ -7,9 +7,9 @@ const swaggerConfig = (app: Express): void => {
         swaggerDefinition: {
             openapi: '3.0.1',
             info: {
-                title: 'Task Manager',
+                title: 'Divar',
                 version: 'v1',
-                description: 'Task Manager API documentation',
+                description: 'Divar API documentation',
                 contact: {
                     name: 'Alireza Mousavi',
                     email: 'mousavi.dev@gmail.com',

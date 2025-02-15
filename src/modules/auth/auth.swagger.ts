@@ -1,35 +1,32 @@
 /**
  * @swagger
- * components:
- *   schemas:
- *     LoginRequest:
- *       type: object
- *       required:
- *         - userName
- *         - password
- *       properties:
- *         userName:
- *           type: string
- *           description: Username for login
- *           example: johndoe
- *         password:
- *           type: string
- *           description: User password
- *           example: password123
- *           format: password
- *
- * /auth/login:
+ * /auth/send-otp:
  *   post:
- *     summary: Login user
- *     tags:
- *       - Authentication
+ *     summary: Send OTP to mobile number
+ *     tags: [Auth]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/LoginRequest'
+ *             $ref: '#/components/schemas/SendOtpInput'
  *     responses:
  *       200:
- *         description: Login successful
+ *         description: OTP sent successfully
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     SendOtpInput:
+ *       type: object
+ *       required:
+ *         - mobile
+ *       properties:
+ *         mobile:
+ *           type: string
+ *           description: Mobile number starting with +98 followed by 10 digits
+ *           pattern: "^\\+98\\d{10}$"
+ *           example: "+989123456789"
  */
