@@ -3,13 +3,13 @@ import swaggerUi from 'swagger-ui-express';
 import { Express } from 'express';
 
 const swaggerConfig = (app: Express): void => {
-    const swaggerDocumentation = swaggerJSDoc({
+    const swaggerDocumentation: object = swaggerJSDoc({
         swaggerDefinition: {
             openapi: '3.0.1',
             info: {
-                title: 'ProjectName',
+                title: 'Task Manager',
                 version: 'v1',
-                description: '',
+                description: 'Task Manager API documentation',
                 contact: {
                     name: 'Alireza Mousavi',
                     email: 'mousavi.dev@gmail.com',
